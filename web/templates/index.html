@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Todo App</title>
+    <script src="https://unpkg.com/htmx.org@1.9.6"></script>
+  </head>
+  <body>
+    <h1>Todos</h1>
+
+    <form
+      hx-post="/add"
+      hx-target="#todo-list"
+      hx-swap="outerHTML"
+      onsubmit="this.reset()"
+    >
+      <input type="text" name="task" placeholder="New todo..." required />
+      <button type="submit">Add</button>
+    </form>
+
+    <div id="todo-list">
+      {% include "todos.html" %}
+    </div>
+  </body>
+</html>

@@ -1,0 +1,41 @@
+<ul>
+  {% for todo in todos %}
+  <li>
+    <form
+      hx-post="/toggle/{{ todo[0] }}"
+      hx-target="#todo-list"
+      hx-swap="outerHTML"
+      style="display: inline"
+    >
+      <input
+        type="checkbox"
+        {% if todo[2] %}checked{% endif %}
+        onchange="this.form.submit()"
+      />
+    </form>
+
+    {{ todo[1] }}
+
+    <!-- Edit -->
+    <form
+      hx-post="/edit/{{ todo[0] }}"
+      hx-target="#todo-list"
+      hx-swap="outerHTML"
+      style="display: inline"
+    >
+      <input type="text" name="task" value="{{ todo[1] }}" required />
+      <button type="submit">Save</button>
+    </form>
+
+    <!-- Delete -->
+    <form
+      hx-post="/delete/{{ todo[0] }}"
+      hx-target="#todo-list"
+      hx-swap="outerHTML"
+      style="display: inline"
+    >
+      <button type="submit">Delete</button>
+    </form>
+  </li>
+  {% endfor %}
+</ul>
